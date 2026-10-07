@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Telegram orqali tasdiqlash</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="shell">
+        <header class="brand">
+            <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path fill="currentColor"
+                        d="M21.5 3.2 2.9 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.8-1.5-1.4Zm-3.1 3.6-8.2 7.4-.3 3.5-1.4-4.6 9.9-6.3Z" />
+                </svg>
+            </span>
+            <h1>Telegram orqali tasdiqlash</h1>
+        </header>
+
+        <div class="card">
+            <p id="message" class="message" role="status" aria-live="polite" hidden></p>
+
+            <!-- Kirish / Ro'yxatdan o'tish -->
+            <section id="view-auth" data-view>
+                <div class="tabs" role="tablist" aria-label="Hisob amali">
+                    <button type="button" role="tab" id="tab-login" class="tabs__tab is-active" aria-selected="true"
+                        aria-controls="form-login">Kirish</button>
+                    <button type="button" role="tab" id="tab-register" class="tabs__tab" aria-selected="false"
+                        aria-controls="form-register">Ro'yxatdan o'tish</button>
+                </div>
+
+                <form id="form-login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+                    <div class="field">
+                        <label for="login-phone">Telefon raqami</label>
+                        <input id="login-phone" name="phone_number" type="tel" inputmode="tel" autocomplete="tel"
+                            placeholder="+998901234567" required>
+                        <p class="field__error" data-error-for="phone_number"></p>
+                    </div>
+                    <div class="field">
+                        <label for="login-password">Parol</label>
+                        <input id="login-password" name="password" type="password" autocomplete="current-password"
+                            required>
+                        <p class="field__error" data-error-for="password"></p>
+                    </div>
+                    <button type="submit" class="btn">Kirish</button>
+                </form>
+
+                <form id="form-register" role="tabpanel" aria-labelledby="tab-register" novalidate hidden>
+                    <div class="field">
+                        <label for="register-phone">Telefon raqami</label>
+                        <input id="register-phone" name="phone_number" type="tel" inputmode="tel" autocomplete="tel"
+                            maxlength="20" placeholder="+998901234567" required>
+                        <p class="field__hint">Tasdiqlash kodi shu raqamga bog'langan Telegramga yuboriladi.</p>
+                        <p class="field__error" data-error-for="phone_number"></p>
+                    </div>
+                    <div class="field">
+                        <label for="register-password">Parol</label>
+                        <input id="register-password" name="password" type="password" autocomplete="new-password"
+                            minlength="8" maxlength="128" required>
+                        <p class="field__hint">Kamida 8 ta belgi.</p>
+                        <p class="field__error" data-error-for="password"></p>
+                    </div>
+                    <button type="submit" class="btn">Kod yuborish</button>
+                </form>
+            </section>
+
+            <!-- Kodni tasdiqlash -->
+            <section id="view-verify" data-view hidden>
+                <h2>Kodni kiriting</h2>
+                <p class="lead">Telegramdagi <strong>Verification Codes</strong> chatiga kelgan 6 xonali kodni kiriting.
+                </p>
+                <form id="form-verify" novalidate>
+                    <div class="field">
+                        <label for="verify-code">Tasdiqlash kodi</label>
+                        <input id="verify-code" name="code" class="code-input" type="text" inputmode="numeric"
+                            autocomplete="one-time-code" pattern="\d{6}" maxlength="6" placeholder="000000" required>
+                        <p class="field__error" data-error-for="code"></p>
+                        <p class="field__error" data-error-for="request_id"></p>
+                    </div>
+                    <button type="submit" class="btn">Tasdiqlash</button>
+                </form>
+                <div class="verify-actions">
+                    <button type="button" id="resend-btn" class="link-btn">Kodni qayta yuborish</button>
+                    <button type="button" id="back-btn" class="link-btn">Orqaga</button>
+                </div>
+            </section>
+
+            <!-- Muvaffaqiyat -->
+            <section id="view-done" data-view hidden>
+                <h2 id="done-title">Tayyor</h2>
+                <p id="done-text" class="lead"></p>
+                <button type="button" id="done-btn" class="btn btn--secondary">Boshiga qaytish</button>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
